@@ -24,4 +24,4 @@ for u in urls_row:
     list.append([name, thumb, details])
 
 df = pd.DataFrame(list, columns=['name', 'thumbnail', 'details'])
-df.to_csv('block-product.csv', index=False)
+df.to_csv('block-product.csv', index=False, encoding='utf-8-sig')
