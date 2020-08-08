@@ -24,7 +24,7 @@ def mainSetting():
 def crawlingData(date, pageCount):
     now = datetime.now()
     l = []
-    for pagecount in range(1, int(pageCount)):
+    for pagecount in range(1, int(pageCount)+1):
         r = requests.get("http://news.naver.com/main/list.nhn?mode=LSD&mid=sec&sid1=100&date=" +
                          str(date) + "&page=" + str(pagecount))
         c = r.content
@@ -32,10 +32,10 @@ def crawlingData(date, pageCount):
         all = soup.find_all("li")
         for item in all:
             for item2 in item.find_all("dl"):
-                d = {} # 사전 d
+                d = {}
                 try:
                     linkTag = item2.find("dt", {"class": ""}).find("a")
-                    d["LinkSrc"] = linkTag['href'] # 사전 d의 LinkSrc라는 키에 href 내용을 가져와 저장
+                    d["LinkSrc"] = linkTag['href']
                     d["Title"] = linkTag.text.replace("\t", "").replace("\n", "").replace(",", "").replace('"',"").replace("\r", "")[1:len(linkTag.text) + 1]
                 except:
                     d["LinkSrc"] = "None"
